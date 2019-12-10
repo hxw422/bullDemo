@@ -18,7 +18,8 @@ myFirstQueue.process( async (job) => {
 // Define a local completed event
 myFirstQueue.on('completed', (job, result) => {
   console.log(`Job completed with result ${JSON.stringify(result)}`);
-})
+  job.remove();
+});
 
 router.get('/', async (ctx, next) => {
   const job = await myFirstQueue.add({
